@@ -5,22 +5,35 @@ export default function Search(){
 
   const [query, setQuery] = React.useState("")
   const [movies, setMovies] = React.useState([])
+  const [page, setPage] = React.useState(1)
 
-  const searchMovie = async(e) => {
+    const searchMovie = (e) => {
 
     e.preventDefault()
+    
+    setPage(1)
 
-    try {
-      const response = await fetch(`http://www.omdbapi.com/?s=${query}&apikey=a3bef56a`)
-      const data = await response.json()
-      console.log(data)
-
-      setMovies(data.Search || [])
-    }
-    catch(err) {
-       console.log('Error occured', err);
-    }
   }
+
+  React.useEffect(() => {
+
+    const fetchMovies = async(e) => {
+
+      try {
+        const response = await fetch(`http://www.omdbapi.com/?s=${query}&page=${page}&apikey=a3bef56a`)
+        const data = await response.json()
+        console.log(data)
+
+        setMovies(data.Search || [])
+      }
+      catch(err) {
+        console.log('Error occured', err);
+      }
+    }
+    if (query){
+      fetchMovies()
+    }
+  }, [page, query])
 
   return (
     <>
@@ -35,6 +48,8 @@ export default function Search(){
         key={movie.imdbID}
         {...movie}/>
       ))}
+      <button onClick={() => setPage(prev => prev + 1)}>next page</button>
+      <button onClick={() => setPage(prev => Math.max(prev - 1, 1))}>Last page</button>
     </>
   )
 }
