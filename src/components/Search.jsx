@@ -36,20 +36,22 @@ export default function Search(){
   }, [page, query])
 
   return (
-    <>
-    <div>
-      <form onSubmit={searchMovie}>
-        <input value={query} onChange={(e) => setQuery(e.target.value)} type="text" placeholder="enter the movie name"/>
-        <button type="submit">Submit</button>
-      </form>
+    <div className="container">
+      <div className="search">
+        <form onSubmit={searchMovie}>
+          <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} type="text" placeholder="enter the movie name"/>
+          <button className="search-btn" type="submit">Submit</button>
+        </form>
+      </div>
+      <div className="render">
+        {movies.map((movie) => (
+          <Render 
+          key={movie.imdbID}
+          {...movie}/>
+        ))}
+        <button onClick={() => setPage(prev => prev + 1)}>next page</button>
+        <button onClick={() => setPage(prev => Math.max(prev - 1, 1))}>Last page</button>
+      </div>
     </div>
-      {movies.map((movie) => (
-        <Render 
-        key={movie.imdbID}
-        {...movie}/>
-      ))}
-      <button onClick={() => setPage(prev => prev + 1)}>next page</button>
-      <button onClick={() => setPage(prev => Math.max(prev - 1, 1))}>Last page</button>
-    </>
   )
 }

@@ -1,7 +1,7 @@
 export default function Nav(){
   return (
-    <>
-      <h1>Movie Search App</h1>
-    </>
+    <div className="nav">
+      <h1 className="nav-header">Movie Search App</h1>
+    </div>
   )
 }
