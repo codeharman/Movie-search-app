@@ -49,8 +49,10 @@ export default function Search(){
           key={movie.imdbID}
           {...movie}/>
         ))}
-        <button onClick={() => setPage(prev => prev + 1)}>next page</button>
-        <button onClick={() => setPage(prev => Math.max(prev - 1, 1))}>Last page</button>
+      </div>
+      <div className="btn-container">
+        <button className="btn" onClick={() => setPage(prev => prev + 1)}>Next page</button>
+        <button className="btn" onClick={() => setPage(prev => Math.max(prev - 1, 1))}>Last page</button>
       </div>
     </div>
   )
