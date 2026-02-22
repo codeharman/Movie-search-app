@@ -20,7 +20,7 @@ export default function Search(){
     const fetchMovies = async(e) => {
 
       try {
-        const response = await fetch(`http://www.omdbapi.com/?s=${query}&page=${page}&apikey=a3bef56a`)
+        const response = await fetch(`https://www.omdbapi.com/?s=${query}&page=${page}&apikey=a3bef56a`)
         const data = await response.json()
         console.log(data)
 
